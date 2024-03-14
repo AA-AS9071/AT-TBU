@@ -80,8 +80,8 @@ def main():
         # Group Number input
         group = st.text_input("Group Number", "")
 
-        # Button to process
-        if st.button("Process"):
+        # Button to run
+        if st.button("Format"):
             # Create a new DataFrame with selected columns
             new_data = pd.DataFrame({
                 'account number': trade_blotter['account number'].str.replace('-', ''),
