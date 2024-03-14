@@ -13,7 +13,7 @@ def format_date(date):
         return ''  # Return an empty string if date is missing
     return pd.to_datetime(date).strftime('%m/%d/%Y')
 
-def main():
+def main():   
     st.title("Trade Blotter Formatting Tool")
 
     #sidebar
@@ -82,6 +82,14 @@ def main():
 
         # Button to run
         if st.button("Format"):
+            # Filter out tickers greater than 5 characters and ending with 'x'
+            trade_blotter = trade_blotter[~(((trade_blotter['ticker'].str.len() == 5) & (trade_blotter['ticker'].str[-1].isin(['x','X']))) | (trade_blotter['ticker'].str.len() > 5))]
+
+
+            # Filter out unwanted actions
+            valid_actions = ['buy', 'bought', 'sell', 'sale', 'sold', 'buy exchange', 'sell exchange', 'buy (confirmed)', 'sell (confirmed)']
+            trade_blotter = trade_blotter[trade_blotter['action'].str.lower().isin(valid_actions)]
+
             # Create a new DataFrame with selected columns
             new_data = pd.DataFrame({
                 'account number': trade_blotter['account number'].str.replace('-', ''),
@@ -91,7 +99,7 @@ def main():
                 'blank_2': '',
                 'ticker': trade_blotter['ticker'],
                 'blank_4': '',
-                'action': trade_blotter['action'].apply(lambda x: 'B' if x == 'buy' else 'S'),
+                'action': trade_blotter['action'].apply(lambda x: 'B' if x.lower() in ['buy', 'bought', 'buy exchange', 'buy (confirmed)'] else 'S'),
                 'quantity': trade_blotter['quantity'].abs().round(3),  # Make quantity absolute and round to 3 decimals
                 'blank_3': '',
                 'price': trade_blotter['price'].abs().round(2),  # Make price absolute and round to 2 decimals
