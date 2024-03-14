@@ -16,6 +16,7 @@ def format_date(date):
 def main():
     st.title("Trade Blotter Formatting Tool")
 
+    #sidebar
     st.sidebar.title("Group Numbers")
     st.sidebar.text("Octavia: 1")
     st.sidebar.text("Litvak: 2")
@@ -62,6 +63,16 @@ def main():
     # File Upload
     uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
 
+
+    st.markdown(""" 
+    ### Important Notes
+    1. Use the following column headers
+        - account number, cusip, ticker, action, quantity, price, trade date 
+        - Please note, cusip is optional
+    2. Please convert the trade blotter to **.csv** before uploading
+    """)
+
+
     if uploaded_file is not None:
         # Load and read trade blotter with specified data types
         trade_blotter = pd.read_csv(uploaded_file, dtype={'trade date': str})
@@ -75,7 +86,7 @@ def main():
             new_data = pd.DataFrame({
                 'account number': trade_blotter['account number'].str.replace('-', ''),
                 'blank_0': '',
-                'CUSIP': trade_blotter['CUSIP'] if 'CUSIP' in trade_blotter.columns else '',
+                'cusip': trade_blotter['cusip'] if 'cusip' in trade_blotter.columns else '',
                 'blank_1': '',
                 'blank_2': '',
                 'ticker': trade_blotter['ticker'],
@@ -87,7 +98,7 @@ def main():
                 'blank_4': '',
                 'blank_5': '',
                 'trade date': trade_blotter['trade date'].apply(format_date),
-                'blank_6': trade_blotter['settle date'].apply(format_date),
+                'blank_6': '',
                 'blank_7': '',
                 'blank_8': '',
                 'blank_9': '',
