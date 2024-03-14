@@ -137,7 +137,13 @@ def main():
             with open(output_file_name, 'w') as file:
                 file.write(file_data)
 
-            st.success(f"Output file created successfully: {output_file_name}")
+            st.success(f"Trade blotter formatted successfully: {output_file_name}")
 
+            st.download_button(
+                label="Download txt File",
+                data=file_data.encode('utf-8'),
+                file_name=output_file_name,
+                mime="text/plain"
+            )
 if __name__ == "__main__":
     main()
