@@ -62,9 +62,10 @@ def main():
 
     st.markdown("""
     ### Important Notes
-    1. Use the following column headers
+    1. For ease, you can make a copy of the "User Data" sheet from the onboarding spreadsheet
+    1. Use the following column header names
         - first name, last name, email address
-    2. Please convert the User Data sheet to **.csv** before uploading
+    2. Please save as a **.csv** before uploading
     """)
 
 
@@ -151,7 +152,7 @@ def main():
             with open(output_file_name, 'w') as file:
                 file.write(file_data)
 
-            st.success(f"Trade blotter formatted successfully: {output_file_name}")
+            st.success(f"User Data Formatted Successfully")
 
             st.download_button(
                 label="Download text File",

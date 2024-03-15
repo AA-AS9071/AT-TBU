@@ -147,7 +147,7 @@ def main():
             with open(output_file_name, 'w') as file:
                 file.write(file_data)
 
-            st.success(f"Trade blotter formatted successfully: {output_file_name}")
+            st.success(f"Trade Blotter Formatted Successfully")
 
             st.download_button(
                 label="Download text File",
