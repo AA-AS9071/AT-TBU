@@ -1,3 +1,7 @@
+import streamlit as st
+
+st.header("Trade Blotter Upload")
+
 import pandas as pd
 import streamlit as st
 
@@ -14,8 +18,6 @@ def format_date(date):
     return pd.to_datetime(date).strftime('%m/%d/%Y')
 
 def main():   
-    st.title("Trade Blotter Formatting Tool")
-
     #sidebar
     st.sidebar.title("Group Numbers")
     st.sidebar.text("Octavia: 1")
@@ -42,13 +44,13 @@ def main():
     st.sidebar.text("EverPar: 24")
     st.sidebar.text("Evexia: 25")
     st.sidebar.text("Alpine Hill: 26")
-    st.sidebar.text("Stablepoint: 27")
+    st.sidebar.text("StablePoint: 27")
     st.sidebar.text("Balanced Wealth: 28")
     st.sidebar.text("MKT: 29")
-    st.sidebar.text("PostRock: 30")
+    st.sidebar.text("Postrock: 30")
     st.sidebar.text("Advantage Retirement: 31")
     st.sidebar.text("Northstar: 32")
-    st.sidebar.text("Round Rock: 33")
+    st.sidebar.text("RoundRock: 33")
     st.sidebar.text("C2C: 34")
     st.sidebar.text("Great Oak: 35")
     st.sidebar.text("Sapient: 36")
@@ -148,7 +150,7 @@ def main():
             st.success(f"Trade blotter formatted successfully: {output_file_name}")
 
             st.download_button(
-                label="Download txt File",
+                label="Download text File",
                 data=file_data.encode('utf-8'),
                 file_name=output_file_name,
                 mime="text/plain"
